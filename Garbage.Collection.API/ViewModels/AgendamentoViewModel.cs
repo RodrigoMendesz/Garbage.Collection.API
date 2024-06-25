@@ -1,4 +1,4 @@
-﻿using Garbage.Collection.API.Model;
+﻿using Garbage.Collection.Data.Models;
 
 namespace Garbage.Collection.API.ViewModels
 {

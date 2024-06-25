@@ -1,4 +1,4 @@
-﻿namespace Garbage.Collection.API.Model
+﻿namespace Garbage.Collection.Data.Models
 {
     public class Agendamento
     {

@@ -1,4 +1,4 @@
-﻿namespace Garbage.Collection.API.Models
+﻿namespace Garbage.Collection.Data.Models
 {
     public class Usuario
     {

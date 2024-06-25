@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using Garbage.Collection.API.Model;
-using Garbage.Collection.API.Repository.Interfaces;
-using Garbage.Collection.API.Service.Interfaces;
 using Garbage.Collection.API.ViewModels;
-using Microsoft.AspNetCore.Http;
+using Garbage.Collection.Business.Service.Interfaces;
+using Garbage.Collection.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Garbage.Collection.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class CaminhaoController : ControllerBase
     {
         private readonly ICaminhaoService _service;
@@ -36,7 +36,7 @@ namespace Garbage.Collection.API.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
             
         }
@@ -57,8 +57,7 @@ namespace Garbage.Collection.API.Controllers
             } 
             catch (Exception ex)
             {
-
-                throw ex;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
 
         }
@@ -75,14 +74,13 @@ namespace Garbage.Collection.API.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
 
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, CaminhaoUpdateViewModel viewModel)
+        public async Task<ActionResult> Put(int id, CaminhaoUpdateViewModel viewModel)
         {
             try
             {
@@ -103,8 +101,7 @@ namespace Garbage.Collection.API.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
             
         }
@@ -126,8 +123,7 @@ namespace Garbage.Collection.API.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
             
         }

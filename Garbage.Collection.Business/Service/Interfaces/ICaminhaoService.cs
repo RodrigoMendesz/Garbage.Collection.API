@@ -1,7 +1,6 @@
-﻿using Garbage.Collection.API.Model;
-using Garbage.Collection.API.ViewModels;
+﻿using Garbage.Collection.Data.Models;
 
-namespace Garbage.Collection.API.Service.Interfaces
+namespace Garbage.Collection.Business.Service.Interfaces
 {
     public interface ICaminhaoService
     {

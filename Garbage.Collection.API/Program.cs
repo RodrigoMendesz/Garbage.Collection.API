@@ -1,12 +1,12 @@
-using Garbage.Collection.API.Contexto;
-using Garbage.Collection.API.Repository.Interfaces;
-using Garbage.Collection.API.Repository;
 using Microsoft.EntityFrameworkCore;
-using Garbage.Collection.API.Service.Interfaces;
-using Garbage.Collection.API.Service;
 using AutoMapper;
-using Garbage.Collection.API.Model;
 using Garbage.Collection.API.ViewModels;
+using Garbage.Collection.Data.Context;
+using Garbage.Collection.Data.Repository.Interfaces;
+using Garbage.Collection.Data.Repository;
+using Garbage.Collection.Business.Service;
+using Garbage.Collection.Business.Service.Interfaces;
+using Garbage.Collection.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,14 +21,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ICaminhaoRepository, CaminhaoRepository>();
 builder.Services.AddScoped<ICaminhaoService, CaminhaoService>();
 
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
+
+builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddScoped<IEnderecoService, EnderecoService>();
+
+
 var mapperConfig = new AutoMapper.MapperConfiguration(c => {
     // Permite que coleções nulas sejam mapeadas
     c.AllowNullCollections = true;
     // Permite que valores de destino nulos sejam mapeados
     c.AllowNullDestinationValues = true;
 
-    c.CreateMap<Caminhao, CaminhaoViewModel>();
-    c.CreateMap<Caminhao, CaminhaoUpdateViewModel>();
+    c.CreateMap<Caminhao, CaminhaoViewModel>().ReverseMap();
+    c.CreateMap<Caminhao, CaminhaoUpdateViewModel>().ReverseMap();
+
+    c.CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
 
 });
 

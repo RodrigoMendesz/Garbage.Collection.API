@@ -1,9 +1,10 @@
-﻿using Garbage.Collection.API.Contexto;
-using Garbage.Collection.API.Model;
-using Garbage.Collection.API.Repository.Interfaces;
+﻿
+using Garbage.Collection.Data.Context;
+using Garbage.Collection.Data.Models;
+using Garbage.Collection.Data.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Garbage.Collection.API.Repository
+namespace Garbage.Collection.Data.Repository
 {
     public class CaminhaoRepository : ICaminhaoRepository
     {

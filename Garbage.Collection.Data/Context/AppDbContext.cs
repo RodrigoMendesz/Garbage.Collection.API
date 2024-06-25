@@ -1,9 +1,7 @@
-﻿using Garbage.Collection.API.Model;
+﻿using Garbage.Collection.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
-using System.Diagnostics;
 
-namespace Garbage.Collection.API.Contexto
+namespace Garbage.Collection.Data.Context
 {
     public class AppDbContext : DbContext
     {
