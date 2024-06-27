@@ -9,7 +9,7 @@ namespace Garbage.Collection.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CaminhaoController : ControllerBase
     {
         private readonly ICaminhaoService _service;
