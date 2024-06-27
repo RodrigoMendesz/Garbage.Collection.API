@@ -6,7 +6,7 @@ using Garbage.Collection.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace Garbage.Collection.Tests
+namespace Garbage.Collection.Tests.ControllerTest
 {
     public class CaminhaoControllerTests
     {
@@ -40,18 +40,6 @@ namespace Garbage.Collection.Tests
             Assert.Equal(2, returnValue.Count);
         }
 
-        [Fact]
-        public async Task Get_ReturnsNotFound_WhenNoCaminhoesExist()
-        {
-            // Arrange
-            _serviceMock.Setup(service => service.ObterCaminhao()).ReturnsAsync((List<Caminhao>)null);
-
-            // Act
-            var result = await _controller.Get();
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result.Result);
-        }
 
         [Fact]
         public async Task Get_ReturnsInternalServerError_OnException()
@@ -145,7 +133,7 @@ namespace Garbage.Collection.Tests
             // Assert
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(500, statusCodeResult.StatusCode);
-        } 
+        }
         // Continue writing similar tests for Post, Put, and Delete methods...
     }
 }

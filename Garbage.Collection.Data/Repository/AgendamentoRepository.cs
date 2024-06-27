@@ -19,7 +19,7 @@ namespace Garbage.Collection.Data.Repository
         }
         public async Task<IEnumerable<Agendamento>> Get()
         {
-            return await _context.Agendamentos.ToListAsync();
+            return await _context.Agendamentos.Include(a => a.Endereco).ToListAsync();
         }
 
         public async Task<Agendamento> GetById(int id)

@@ -41,6 +41,7 @@ var mapperConfig = new AutoMapper.MapperConfiguration(c => {
     c.CreateMap<Caminhao, CaminhaoUpdateViewModel>().ReverseMap();
 
     c.CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
+    c.CreateMap<Agendamento, AgendamentoViewModel>().ReverseMap();
 
 });
 
