@@ -34,7 +34,7 @@ namespace Garbage.Collection.API.Controllers
                 
                 return Ok(viewModelList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
@@ -55,7 +55,7 @@ namespace Garbage.Collection.API.Controllers
 
                 return Ok(viewModel);
             } 
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
@@ -104,7 +104,7 @@ namespace Garbage.Collection.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
             
-        }
+         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

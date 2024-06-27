@@ -6,5 +6,6 @@
         public DateTime Data { get; set; }
         public string? Descricao { get; set; }
         public Endereco? Endereco { get; set; }
+        public Caminhao? Caminhao { get; set;}
     }
 }

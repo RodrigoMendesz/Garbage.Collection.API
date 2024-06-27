@@ -7,6 +7,8 @@ using Garbage.Collection.Data.Repository;
 using Garbage.Collection.Business.Service;
 using Garbage.Collection.Business.Service.Interfaces;
 using Garbage.Collection.Data.Models;
+using Microsoft.Extensions.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,8 @@ builder.Services.AddControllers();
 
 // Add DbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+    b => b.MigrationsAssembly("Garbage.Collection.Data")));
 
 builder.Services.AddScoped<ICaminhaoRepository, CaminhaoRepository>();
 builder.Services.AddScoped<ICaminhaoService, CaminhaoService>();

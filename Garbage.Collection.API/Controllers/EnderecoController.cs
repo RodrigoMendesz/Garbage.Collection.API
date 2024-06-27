@@ -98,8 +98,29 @@ namespace Garbage.Collection.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
+
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var endereco = await _service.ExcluirEndereco(id);
+                if (endereco == null)
+                {
+                    return BadRequest();
+                }
+                return NoContent();
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
             
         }
+
 
     }
 }
