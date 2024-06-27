@@ -3,6 +3,7 @@ using Garbage.Collection.API.ViewModels;
 using Garbage.Collection.Business.Service.Interfaces;
 using Garbage.Collection.Data.Models;
 using Garbage.Collection.Data.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Garbage.Collection.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AgendamentoController : ControllerBase
     {
         private readonly IAgendamentoService _service;

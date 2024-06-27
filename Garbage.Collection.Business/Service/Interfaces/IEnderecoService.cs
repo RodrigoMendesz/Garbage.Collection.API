@@ -9,7 +9,7 @@ namespace Garbage.Collection.Business.Service.Interfaces
 {
     public interface IEnderecoService
     {
-        Task<IEnumerable<Endereco>> ObterEnderecos();
+        Task<IEnumerable<Endereco>> ObterEnderecos(int pageNumber, int pageSize);
         Task<Endereco> ObterEnderecoById(int id);
         Task<Endereco> CriarEndereco(Endereco endereco);
         Task<Endereco> AtualizarEndereco(Endereco endereco);

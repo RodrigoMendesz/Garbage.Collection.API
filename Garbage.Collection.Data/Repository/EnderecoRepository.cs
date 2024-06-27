@@ -17,13 +17,41 @@ namespace Garbage.Collection.Data.Repository
         {
             _context = context;
         }
+
+        public IEnumerable<Endereco> GetAll(int page, int size)
+        {
+            return _context.Enderecos.Skip((page - 1) * page)
+                                        .Take(size)
+                                        .AsNoTracking()
+                                        .ToList();
+        }
+        public IEnumerable<Endereco> GetAllReference(int lastReference, int size)
+        {
+            var enderecos = _context.Enderecos.Where(c => c.Id > lastReference)
+                                .OrderBy(c => c.Id)
+                                .Take(size)
+                                .AsNoTracking()
+                                .ToList();
+            return enderecos;
+        }
+        public async Task<IEnumerable<Endereco>> Get(int pageNumber, int pageSize)
+        {
+            return await _context.Enderecos
+                                 .Skip((pageNumber - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToListAsync();
+        }
+
+        public async Task<Endereco> GetById(int id)
+        {
+            return await _context.Enderecos.Where(e => e.Id == id).FirstAsync();
+        }
         public async Task<Endereco> Create(Endereco endereco)
         {
             _context.Enderecos.Add(endereco);
             _context.SaveChanges();
             return endereco;    
         }
-
         public async Task<Endereco> Delete(int id)
         {
             var endereco = await GetById(id);
@@ -31,16 +59,7 @@ namespace Garbage.Collection.Data.Repository
             _context.SaveChanges();
             return endereco;
         }
-
-        public async Task<IEnumerable<Endereco>> Get()
-        {
-            return await _context.Enderecos.ToListAsync();
-        }
-
-        public async Task<Endereco> GetById(int id)
-        {
-            return await _context.Enderecos.Where(e => e.Id == id).FirstAsync();
-        }
+       
 
         public async Task<Endereco> Update(Endereco endereco)
         {

@@ -2,13 +2,16 @@
 using Garbage.Collection.API.ViewModels;
 using Garbage.Collection.Business.Service.Interfaces;
 using Garbage.Collection.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Printing;
 
 namespace Garbage.Collection.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class EnderecoController : ControllerBase
     {
         private readonly IEnderecoService _service;
@@ -18,26 +21,12 @@ namespace Garbage.Collection.API.Controllers
             _service = service;
             _mapper = mapper;
         }
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EnderecoViewModel>>> Get()
+        public async Task<ActionResult<IEnumerable<Endereco>>> Get(int pageNumber = 1, int pageSize = 10)
         {
-            try
-            {
-                var endereco = await _service.ObterEnderecos();
-                if (endereco == null)
-                {
-                    return NotFound();
-                }
-                var viewModelList = _mapper.Map<IEnumerable<EnderecoViewModel>>(endereco);
+            var enderecos = await _service.ObterEnderecos(pageNumber, pageSize);
 
-                return Ok(viewModelList);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
-            }
-
+            return Ok(enderecos);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<EnderecoViewModel>> Get(int id)

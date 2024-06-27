@@ -27,6 +27,6 @@ namespace Garbage.Collection.Business.Service
 
         Task<Endereco> IEnderecoService.ObterEnderecoById(int id) => _repository.GetById(id);
 
-        Task<IEnumerable<Endereco>> IEnderecoService.ObterEnderecos() => _repository.Get();
+        Task<IEnumerable<Endereco>> IEnderecoService.ObterEnderecos(int pageNumber, int pageSize) => _repository.Get(pageNumber, pageSize);
     }
 }

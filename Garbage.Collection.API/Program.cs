@@ -39,11 +39,12 @@ var mapperConfig = new AutoMapper.MapperConfiguration(c => {
     c.AllowNullCollections = true;
     // Permite que valores de destino nulos sejam mapeados
     c.AllowNullDestinationValues = true;
-
+    c.CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
     c.CreateMap<Caminhao, CaminhaoViewModel>().ReverseMap();
     c.CreateMap<Caminhao, CaminhaoUpdateViewModel>().ReverseMap();
-    c.CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
     c.CreateMap<Agendamento, AgendamentoViewModel>().ReverseMap();
+
+    
 
 });
 

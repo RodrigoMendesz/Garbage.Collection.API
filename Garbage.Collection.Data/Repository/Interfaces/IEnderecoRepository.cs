@@ -9,7 +9,7 @@ namespace Garbage.Collection.Data.Repository.Interfaces
 {
     public interface IEnderecoRepository
     {
-        Task<IEnumerable<Endereco>> Get();
+        Task<IEnumerable<Endereco>> Get(int pageNumber, int pageSize);
         Task<Endereco> GetById(int id);
         Task<Endereco> Create(Endereco endereco);
         Task<Endereco> Update(Endereco endereco);
