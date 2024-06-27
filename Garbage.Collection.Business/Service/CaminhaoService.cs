@@ -13,7 +13,7 @@ namespace Garbage.Collection.Business.Service
             _repository = repository;
         }
 
-        public Task<IEnumerable<Caminhao>> ObterCaminhao() => _repository.Get();
+        public Task<IEnumerable<Caminhao>> ObterCaminhao(int pageNumber, int pageSize) => _repository.Get(pageNumber, pageSize);
         public Task<Caminhao> ObterCaminhaoyId(int id) => _repository.GetById(id);
         public Task<Caminhao> CriarCaminhao(Caminhao caminhao) => _repository.Create(caminhao);
         public Task<Caminhao> AtualizarCaminhao(Caminhao caminhao) => _repository.Update(caminhao);

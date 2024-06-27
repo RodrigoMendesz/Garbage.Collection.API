@@ -17,9 +17,28 @@ namespace Garbage.Collection.Data.Repository
         {
             _context = appDbContext;
         }
-        public async Task<IEnumerable<Agendamento>> Get()
+        public IEnumerable<Agendamento> GetAll(int page, int size)
         {
-            return await _context.Agendamentos.Include(a => a.Endereco).ToListAsync();
+            return _context.Agendamentos.Skip((page - 1) * page)
+                                        .Take(size)
+                                        .AsNoTracking()
+                                        .ToList();
+        }
+        public IEnumerable<Agendamento> GetAllReference(int lastReference, int size)
+        {
+            var agendamentos = _context.Agendamentos.Where(c => c.Id > lastReference)
+                                .OrderBy(c => c.Id)
+                                .Take(size)
+                                .AsNoTracking()
+                                .ToList();
+            return agendamentos;
+        }
+        public async Task<IEnumerable<Agendamento>> Get(int pageNumber, int pageSize)
+        {
+            return await _context.Agendamentos
+                                 .Skip((pageNumber - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToListAsync();
         }
 
         public async Task<Agendamento> GetById(int id)

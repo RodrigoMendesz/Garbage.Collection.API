@@ -11,7 +11,7 @@ namespace Garbage.Collection.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class EnderecoController : ControllerBase
     {
         private readonly IEnderecoService _service;
@@ -21,13 +21,7 @@ namespace Garbage.Collection.API.Controllers
             _service = service;
             _mapper = mapper;
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Endereco>>> Get(int pageNumber = 1, int pageSize = 10)
-        {
-            var enderecos = await _service.ObterEnderecos(pageNumber, pageSize);
-
-            return Ok(enderecos);
-        }
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<EnderecoViewModel>> Get(int id)
         {
@@ -107,7 +101,25 @@ namespace Garbage.Collection.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
-            
+
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Endereco>>> Get(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var enderecos = await _service.ObterEnderecos(pageNumber, pageSize);
+                if (enderecos == null)
+                {
+                    return BadRequest();
+                }
+                return Ok(enderecos);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
+
         }
 
 

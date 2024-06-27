@@ -17,7 +17,7 @@ namespace Garbage.Collection.Business.Service
         {
             _service = service;
         }
-        public Task<IEnumerable<Agendamento>> ObterAgendamentos() => _service.Get();
+        public Task<IEnumerable<Agendamento>> ObterAgendamentos(int pageNumber, int pageSize) => _service.Get(pageNumber, pageSize);
         public Task<Agendamento> ObterAgendamentoById(int id) => _service.GetById(id);
         public Task<Agendamento> AtualizarAgendamento(Agendamento agendamento) => _service.Update(agendamento);
         public Task<Agendamento> CriarAgendamento(Agendamento agendamento) => _service.Create(agendamento);

@@ -13,9 +13,28 @@ namespace Garbage.Collection.Data.Repository
         {
             _context = context;
         }
-        public async Task<IEnumerable<Caminhao>> Get()
+        public IEnumerable<Caminhao> GetAll(int page, int size)
         {
-            return await _context.Caminhao.ToListAsync();
+            return _context.Caminhao.Skip((page - 1) * page)
+                                        .Take(size)
+                                        .AsNoTracking()
+                                        .ToList();
+        }
+        public IEnumerable<Caminhao> GetAllReference(int lastReference, int size)
+        {
+            var caminhoes = _context.Caminhao.Where(c => c.Id > lastReference)
+                                .OrderBy(c => c.Id)
+                                .Take(size)
+                                .AsNoTracking()
+                                .ToList();
+            return caminhoes;
+        }
+        public async Task<IEnumerable<Caminhao>> Get(int pageNumber, int pageSize)
+        {
+            return await _context.Caminhao
+                                 .Skip((pageNumber - 1) * pageSize)
+                                 .Take(pageSize)
+                                 .ToListAsync();
         }
         public async Task<Caminhao> GetById(int id)
          {

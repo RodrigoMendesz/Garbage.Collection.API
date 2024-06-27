@@ -20,26 +20,6 @@ namespace Garbage.Collection.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CaminhaoViewModel>>> Get()
-        {
-            try
-            {
-                var caminhoes = await _service.ObterCaminhao();
-                if (caminhoes == null)
-                {
-                    NotFound();
-                }
-                var viewModelList = _mapper.Map<IEnumerable<CaminhaoViewModel>>(caminhoes);
-                
-                return Ok(viewModelList);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
-            }
-            
-        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CaminhaoViewModel>> Get(int id)
@@ -103,8 +83,8 @@ namespace Garbage.Collection.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
-            
-         }
+
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
@@ -125,7 +105,26 @@ namespace Garbage.Collection.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
-            
+
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Caminhao>>> Get(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var caminhoes = await _service.ObterCaminhao(pageNumber, pageSize);
+                if (caminhoes == null)
+                {
+                    NotFound();
+                }
+
+                return Ok(caminhoes);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
+
         }
     }
 }

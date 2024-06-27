@@ -9,7 +9,7 @@ namespace Garbage.Collection.Business.Service.Interfaces
 {
     public interface IAgendamentoService
     {
-        Task<IEnumerable<Agendamento>> ObterAgendamentos();
+        Task<IEnumerable<Agendamento>> ObterAgendamentos(int pageNumber, int pageSize);
         Task<Agendamento> ObterAgendamentoById(int id);
         Task<Agendamento> CriarAgendamento(Agendamento agendamento);
         Task<Agendamento> AtualizarAgendamento(Agendamento agendamento);

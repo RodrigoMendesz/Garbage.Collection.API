@@ -22,26 +22,7 @@ namespace Garbage.Collection.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AgendamentoViewModel>>> Get()
-        {
-            try
-            {
-                var agendamentos = await _service.ObterAgendamentos();
-                if (agendamentos == null)
-                {
-                    return BadRequest();
-                }
-                var viewModelList = _mapper.Map<IEnumerable<AgendamentoViewModel>>(agendamentos);
-                return Ok(viewModelList);
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-
-        }
+       
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AgendamentoViewModel>> GetById(int id)
@@ -132,6 +113,27 @@ namespace Garbage.Collection.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AgendamentoViewModel>>> Get(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                var agendamentos = await _service.ObterAgendamentos(pageNumber, pageSize);
+                if (agendamentos == null)
+                {
+                    return BadRequest();
+                }
+
+                return Ok(agendamentos);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
     }
 
