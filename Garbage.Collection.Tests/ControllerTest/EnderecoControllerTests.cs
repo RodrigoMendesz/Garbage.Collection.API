@@ -29,11 +29,13 @@ namespace Garbage.Collection.Tests.ControllerTest
         [Fact]
         public async Task Get_ReturnsOkResult_WithListOfEnderecoViewModel()
         {
+            int pageNumber = 1;
+            int pageSize = 10;
             // Arrange
             var enderecos = new List<Endereco> { new Endereco { Id = 1 }, new Endereco { Id = 2 } };
             var enderecoViewModels = new List<EnderecoViewModel> { new EnderecoViewModel { Id = 1 }, new EnderecoViewModel { Id = 2 } };
 
-            _serviceMock.Setup(service => service.ObterEnderecos()).ReturnsAsync(enderecos);
+            _serviceMock.Setup(service => service.ObterEnderecos(pageNumber, pageSize)).ReturnsAsync(enderecos);
             _mapperMock.Setup(mapper => mapper.Map<IEnumerable<EnderecoViewModel>>(enderecos)).Returns(enderecoViewModels);
 
             // Act
@@ -49,7 +51,9 @@ namespace Garbage.Collection.Tests.ControllerTest
         public async Task Get_ReturnsNotFound_WhenNoEnderecosExist()
         {
             // Arrange
-            _serviceMock.Setup(service => service.ObterEnderecos()).ReturnsAsync((List<Endereco>)null);
+            int pageNumber = 1;
+            int pageSize = 10;
+            _serviceMock.Setup(service => service.ObterEnderecos(pageNumber, pageSize)).ReturnsAsync((List<Endereco>)null);
 
             // Act
             var result = await _controller.Get();
@@ -62,7 +66,9 @@ namespace Garbage.Collection.Tests.ControllerTest
         public async Task Get_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            _serviceMock.Setup(service => service.ObterEnderecos()).ThrowsAsync(new Exception());
+            int pageNumber = 1;
+            int pageSize = 10;
+            _serviceMock.Setup(service => service.ObterEnderecos(pageNumber,pageSize)).ThrowsAsync(new Exception());
 
             // Act
             var result = await _controller.Get();

@@ -10,6 +10,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Garbage.Collection.API/Garbage.Collection.API.csproj", "Garbage.Collection.API/"]
+COPY ["Garbage.Collection.Business/Garbage.Collection.Business.csproj", "Garbage.Collection.Business/"]
+COPY ["Garbage.Collection.Data/Garbage.Collection.Data.csproj", "Garbage.Collection.Data/"]
 RUN dotnet restore "./Garbage.Collection.API/Garbage.Collection.API.csproj"
 COPY . .
 WORKDIR "/src/Garbage.Collection.API"

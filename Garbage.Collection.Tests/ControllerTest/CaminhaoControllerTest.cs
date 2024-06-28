@@ -5,6 +5,7 @@ using Garbage.Collection.Business.Service.Interfaces;
 using Garbage.Collection.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System.Drawing.Printing;
 
 namespace Garbage.Collection.Tests.ControllerTest
 {
@@ -25,10 +26,12 @@ namespace Garbage.Collection.Tests.ControllerTest
         public async Task Get_ReturnsOkResult_WithListOfCaminhaoViewModel()
         {
             // Arrange
+            int pageNumber = 1;
+            int pageSize = 10;
             var caminhoes = new List<Caminhao> { new Caminhao { Id = 1 }, new Caminhao { Id = 2 } };
             var caminhoesViewModel = new List<CaminhaoViewModel> { new CaminhaoViewModel { Id = 1 }, new CaminhaoViewModel { Id = 2 } };
 
-            _serviceMock.Setup(service => service.ObterCaminhao()).ReturnsAsync(caminhoes);
+            _serviceMock.Setup(service => service.ObterCaminhao(pageNumber, pageSize)).ReturnsAsync(caminhoes);
             _mapperMock.Setup(mapper => mapper.Map<IEnumerable<CaminhaoViewModel>>(caminhoes)).Returns(caminhoesViewModel);
 
             // Act
@@ -45,7 +48,9 @@ namespace Garbage.Collection.Tests.ControllerTest
         public async Task Get_ReturnsInternalServerError_OnException()
         {
             // Arrange
-            _serviceMock.Setup(service => service.ObterCaminhao()).ThrowsAsync(new Exception());
+            int pageNumber = 1;
+            int pageSize = 10;
+            _serviceMock.Setup(service => service.ObterCaminhao(pageNumber, pageSize)).ThrowsAsync(new Exception());
 
             // Act
             var result = await _controller.Get();
