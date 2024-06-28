@@ -13,8 +13,9 @@ namespace Garbage.Collection.Data.Context
     {
         public AppDbContext CreateDbContext(string[] args)
         {
+            // Ajuste o caminho base conforme necessário
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../GarbageCollection.API"))
+                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
@@ -25,4 +26,5 @@ namespace Garbage.Collection.Data.Context
             return new AppDbContext(optionsBuilder.Options);
         }
     }
+
 }
