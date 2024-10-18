@@ -20,71 +20,67 @@ Essa API permite gerenciar recursos de coleta inteligente com operações CRUD (
 
 ## Instalação
 
-1. Clone este repositório:
+  1. Clone este repositório:
 
-git clone https://github.com/seu-usuario/sua-api-dotnet.
+    git clone https://github.com/seu-usuario/sua-api-dotnet.
 
-2. Navegue até a pasta do projeto:
+  2. Navegue até a pasta do projeto:
 
-cd /GarbageCollection
+    cd /GarbageCollection
 
-3. Instale as dependências:
+  3. Instale as dependências:
 
-dotnet restore
+    dotnet restore
 
-4.Configure o banco de dados no arquivo appsettings.json:
+  4.Configure o banco de dados no arquivo appsettings.json:
 
-"ConnectionStrings": {
-  "DefaultConnection": "Server=localhost;Database=SeuBancoDeDados;Trusted_Connection=True;"
-}
+    "ConnectionStrings": {
+      "DefaultConnection": "Server=localhost;Database=SeuBancoDeDados;Trusted_Connection=True;"
+    }
 
-5. Atualize o banco de dados com as migrações do Entity Framework Core:
+  5. Atualize o banco de dados com as migrações do Entity Framework Core:
    
-dotnet ef database update
+    dotnet ef database update
 
 
-##Executando a Aplicação
-Execute o projeto localmente com o seguinte comando:
+  ##Executando a Aplicação
+    Execute o projeto localmente com o seguinte comando:
 
-dotnet run
-A API estará disponível em: https://localhost:5001 ou http://localhost:5000.
+    dotnet run
 
-##Documentação da API
-A documentação da API está disponível no Swagger. Para acessar, inicie o servidor e acesse:
+  ##Documentação da API
+    A documentação da API está disponível no Swagger. Para acessar, inicie o servidor e acesse:
 
-https://localhost:5001/swagger
+    https://localhost:5001/swagger
 
-##Autenticação
-Esta API usa autenticação baseada em JWT. Para acessar alguns endpoints protegidos, é necessário incluir um token de autorização no cabeçalho da requisição:
+  ##Autenticação
+    Esta API usa autenticação baseada em JWT. Para acessar alguns endpoints protegidos, é necessário incluir um token de autorização no cabeçalho da requisição:
 
-Authorization: Bearer {seu_token_jwt}
-Gerando Token de Autenticação
-Você pode gerar um token autenticando um usuário via o endpoint /api/auth/login com as credenciais:
+    Authorization: Bearer {seu_token_jwt}
+    Gerando Token de Autenticação
+    Você pode gerar um token autenticando um usuário via o endpoint /api/auth/login com as credenciais:
+    {
+      "username": "adm",
+      "password": "123"
+    }
 
-json
-Copiar código
-{
-  "username": "adm",
-  "password": "123"
-}
+  ##Testes
+    Para rodar os testes unitários, utilize o seguinte comando:
 
-##Testes
-Para rodar os testes unitários, utilize o seguinte comando:
+    dotnet test
 
-dotnet test
+  ##Deploy no Azure
+    Configure seu ambiente no Azure App Service.
+    Publique sua API no Azure usando o comando:
 
-##Deploy no Azure
-Configure seu ambiente no Azure App Service.
-Publique sua API no Azure usando o comando:
+    dotnet publish --configuration Release
+    Siga as instruções do Azure para fazer o deploy da aplicação.
 
-dotnet publish --configuration Release
-Siga as instruções do Azure para fazer o deploy da aplicação.
+  ##Contribuições
+    Contribuições são bem-vindas! Por favor, abra uma issue antes de enviar um pull request.
 
-##Contribuições
-Contribuições são bem-vindas! Por favor, abra uma issue antes de enviar um pull request.
-
-##Licença
-Este projeto está licenciado sob a MIT License.
+  ##Licença
+    Este projeto está licenciado sob a MIT License.
 
 
 
