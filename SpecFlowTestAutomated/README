@@ -1,0 +1,37 @@
+# SpecFlowTestAutomated
+
+Este projeto é uma suíte de testes automatizados para a API de Coleta de Lixo, utilizando SpecFlow e Xunit. O objetivo principal é garantir que a lógica de negócios implementada nos controladores da API funcione conforme esperado.
+
+## Requisitos
+
+- .NET 6 ou superior
+- Visual Studio ou outro IDE que suporte .NET
+- Pacotes NuGet:
+  - SpecFlow
+  - SpecFlow.xUnit
+  - Moq
+  - AutoMapper
+
+## Estrutura do Projeto
+
+- **Features**: Contém os arquivos `.feature` que descrevem os cenários de teste.
+- **StepDefinitions**: Contém a implementação dos passos definidos nas features.
+- **Migrations**: Scripts para gerenciar a estrutura do banco de dados, se aplicável.
+- **Tests**: Contém testes automatizados utilizando Xunit.
+
+## Instalação
+
+1. Clone o repositório:
+
+   git clone https://github.com/RodrigoMendessz/SpecFlowTestAutomated.git
+
+2. Navegue até o diretório do projeto:
+
+    cd SpecFlowTestAutomated
+
+3. Restaure os pacotes NuGet:
+
+  dotnet restore
+
+4. Execute os testes
+dotnet test
