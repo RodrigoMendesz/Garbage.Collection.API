@@ -1,4 +1,4 @@
-﻿Feature: Endereco Management
+﻿Feature: Endereco
 
   Scenario: Get Endereco by Id
     Given um Endereco existente com o id 1

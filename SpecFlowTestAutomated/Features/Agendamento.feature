@@ -1,4 +1,4 @@
-﻿Feature: AgendamentoController
+﻿Feature: Agendamento
   Controller para agendamento de coletas de lixo inteligente
 
   @getById
