@@ -43,21 +43,20 @@ namespace Garbage.Collection.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] CaminhaoViewModel viewModel)
+        public async Task<ActionResult> Post([FromBody] CaminhaoViewModel viewModel)
         {
             try
             {
                 var caminhao = _mapper.Map<Caminhao>(viewModel);
-                _service.CriarCaminhao(caminhao);
+                await _service.CriarCaminhao(caminhao); // Certifique-se de que CriarCaminhao é assíncrono
                 return CreatedAtAction(nameof(Get), new { id = caminhao.Id }, caminhao);
-
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
-
         }
+
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, CaminhaoUpdateViewModel viewModel)

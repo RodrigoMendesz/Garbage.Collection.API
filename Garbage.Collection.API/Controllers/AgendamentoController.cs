@@ -65,7 +65,7 @@ namespace Garbage.Collection.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AgendamentoViewModel agendamentoViewModel)
+        public async Task<ActionResult> Update(int id, [FromBody] AgendamentoViewModel agendamentoViewModel)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace Garbage.Collection.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int  id)
+        public async Task<ActionResult> Delete(int  id)
         {
             try
             {
